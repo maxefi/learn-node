@@ -3,9 +3,7 @@ const router = express.Router();
 const storeController = require('../controllers/storeConroller');
 
 router.get('/', storeController.homePage);
-
-router.get('/reverse/:name', (req, res) => {
-    res.send([...req.params.name].reverse().join(''));
-});
+router.get('/add', storeController.addStore);
+router.post('/add', storeController.createStore);
 
 module.exports = router;
