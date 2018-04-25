@@ -11,29 +11,7 @@ exports.addStore = (req, res) => {
 };
 
 exports.createStore = async (req, res) => {
-    // see data posted
-    // console.log('req.body: ', req.body);
-
-    const store = new Store(req.body);
-
-    // sync example with a callback
-    // store.save(function(err, store) {
-    //     if(!err) return res.redirect('/');
-    // });
-
-    // sync example with promises
-    // store.save()
-    //      .then(store => {
-    //          res.json(store);
-    //      })
-    //      .then(stores => {
-    //          res.render('storeList', { stores });
-    //      })
-    //      .catch(err => {
-    //          throw Error(err);
-    //      });
-
-    // should be try/catched, instead create hof 'catchErrors' for it
-    await store.save();
-    res.redirect('/');
+    const store = await (new Store(req.body)).save();
+    req.flash('success', `Successfully Created ${store.name}. Care to leave a review?`);
+    res.redirect(`/store/${store.slug}`);
 };
