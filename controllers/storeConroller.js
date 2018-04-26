@@ -28,10 +28,7 @@ exports.addStore = (req, res) => {
 exports.upload = multer(multerOptions).single('photo');
 
 exports.resize = async (req, res, next) => {
-    if (!req.file) {
-        next();
-        return;
-    }
+    if (!req.file) return next();
     const extension = req.file.mimetype.split('/')[1];
     req.body.photo = `${uuid.v4()}.${extension}`;
     const photo = await jimp.read(req.file.buffer);
@@ -73,4 +70,10 @@ exports.updateStore = async (req, res) => {
     req.flash('success', `Successfully updated <strong>${name}</strong>. <a href='/stores/${slug}'>View Store -></a>`);
     // 2. Redirect them the store and tell it worked
     res.redirect(`/stores/${_id}/edit`);
+};
+
+exports.getStoreBySlug = async (req, res, next) => {
+    const store = await Store.findOne({ slug: req.params.slug });
+    if (!store) return next();
+    res.render('store', { store, title: store.name });
 };
