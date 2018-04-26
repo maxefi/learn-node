@@ -6,7 +6,7 @@ const storeSchema = new mongoose.Schema({
     name: {
         type: String,
         trim: true, // no spaces
-        required: 'required',
+        required: 'Name is REQUIRED',
     },
     slug: String,
     description: {
@@ -14,6 +14,26 @@ const storeSchema = new mongoose.Schema({
         trim: true,
     },
     tags: [String],
+    created: {
+        type: Date,
+        default: Date.now,
+    },
+    location: {
+        type: {
+            type: String,
+            default: 'Point',
+        },
+        coordinates: [
+            {
+                type: Number,
+                required: 'Coordinates are REQUIRED',
+            },
+        ],
+        address: {
+            type: String,
+            required: 'Address is REQUIRED',
+        },
+    },
 });
 
 storeSchema.pre('save', function(next) {
