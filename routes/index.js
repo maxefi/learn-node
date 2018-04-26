@@ -3,11 +3,13 @@ const router = express.Router();
 const storeController = require('../controllers/storeConroller');
 const { catchErrors } = require('../handlers/errorHandlers');
 
-router.get('/', catchErrors(storeController.getStores));
-router.get('/stores', catchErrors(storeController.getStores));
-router.get('/add', storeController.addStore);
-router.post('/add', catchErrors(storeController.createStore));
-router.post('/add/:id', catchErrors(storeController.updateStore));
-router.get('/stores/:id/edit', catchErrors(storeController.editStore));
+const { getStores, addStore, createStore, updateStore, editStore, upload, resize } = storeController;
+
+router.get('/', catchErrors(getStores));
+router.get('/stores', catchErrors(getStores));
+router.get('/add', addStore);
+router.post('/add', upload, catchErrors(resize), catchErrors(createStore));
+router.post('/add/:id', upload, catchErrors(resize), catchErrors(updateStore));
+router.get('/stores/:id/edit', catchErrors(editStore));
 
 module.exports = router;
