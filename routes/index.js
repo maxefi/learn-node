@@ -3,6 +3,7 @@ const router = express.Router();
 const storeController = require('../controllers/storeConroller');
 const { catchErrors } = require('../handlers/errorHandlers');
 const userController = require('../controllers/userController');
+const oauthController = require('../controllers/oauthController');
 
 const {
     getStores, addStore, createStore, updateStore, editStore, upload, resize, getStoreBySlug,
@@ -22,9 +23,6 @@ router.get('/tags', catchErrors(getStoresByTag));
 router.get('/tags/:tag', catchErrors(getStoresByTag));
 router.get('/login', loginForm);
 router.get('/register', registerForm);
-// 1. validate the registration data
-// 2. register the user
-// 3. log in
-router.post('/register', validateRegister, register);
+router.post('/register', validateRegister, register, oauthController.login);
 
 module.exports = router;

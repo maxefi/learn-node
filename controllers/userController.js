@@ -39,7 +39,5 @@ exports.register = async (req, res, next) => {
     // in this case we should use cbs or promisify to turn it into promise based
     const registerWithPromise = promisify(User.register, User);
     await registerWithPromise(user, password);
-    res.send('qweqweqw');
     next();
-
 };
