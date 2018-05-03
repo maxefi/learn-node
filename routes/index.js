@@ -3,7 +3,7 @@ const router = express.Router();
 const storeController = require('../controllers/storeConroller');
 const { catchErrors } = require('../handlers/errorHandlers');
 const userController = require('../controllers/userController');
-const oauthController = require('../controllers/oauthController');
+const authController = require('../controllers/authController');
 
 const {
     getStores, addStore, createStore, updateStore, editStore, upload, resize, getStoreBySlug,
@@ -23,6 +23,6 @@ router.get('/tags', catchErrors(getStoresByTag));
 router.get('/tags/:tag', catchErrors(getStoresByTag));
 router.get('/login', loginForm);
 router.get('/register', registerForm);
-router.post('/register', validateRegister, register, oauthController.login);
+router.post('/register', validateRegister, register, authController.login);
 
 module.exports = router;
