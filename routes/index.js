@@ -9,8 +9,8 @@ const {
     getStores, addStore, createStore, updateStore, editStore, upload, resize, getStoreBySlug,
     getStoresByTag,
 } = storeController;
-
 const { loginForm, registerForm, validateRegister, register } = userController;
+const { login, logout } = authController;
 
 router.get('/', catchErrors(getStores));
 router.get('/stores', catchErrors(getStores));
@@ -23,6 +23,8 @@ router.get('/tags', catchErrors(getStoresByTag));
 router.get('/tags/:tag', catchErrors(getStoresByTag));
 router.get('/login', loginForm);
 router.get('/register', registerForm);
-router.post('/register', validateRegister, register, authController.login);
+router.post('/register', validateRegister, register, login);
+router.get('/logout', logout);
+router.post('/login', login);
 
 module.exports = router;
