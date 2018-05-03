@@ -22,6 +22,7 @@ const userSchema = new Schema({
     },
 });
 
+// brings .register method to the user model
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 userSchema.plugin(mongodbErrorHandler);
 
