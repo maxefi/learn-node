@@ -9,7 +9,7 @@ const {
     getStoresByTag,
 } = storeController;
 
-const { loginForm, registerForm } = userController;
+const { loginForm, registerForm, validateRegister } = userController;
 
 router.get('/', catchErrors(getStores));
 router.get('/stores', catchErrors(getStores));
@@ -22,5 +22,9 @@ router.get('/tags', catchErrors(getStoresByTag));
 router.get('/tags/:tag', catchErrors(getStoresByTag));
 router.get('/login', loginForm);
 router.get('/register', registerForm);
+// 1. validate the registration data
+// 2. register the user
+// 3. log in
+router.post('/register', validateRegister);
 
 module.exports = router;
