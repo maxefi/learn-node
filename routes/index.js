@@ -10,11 +10,11 @@ const {
     getStoresByTag,
 } = storeController;
 const { loginForm, registerForm, validateRegister, register } = userController;
-const { login, logout } = authController;
+const { login, logout, isLoggedIn } = authController;
 
 router.get('/', catchErrors(getStores));
 router.get('/stores', catchErrors(getStores));
-router.get('/add', addStore);
+router.get('/add', isLoggedIn, addStore);
 router.post('/add', upload, catchErrors(resize), catchErrors(createStore));
 router.post('/add/:id', upload, catchErrors(resize), catchErrors(updateStore));
 router.get('/stores/:id/edit', catchErrors(editStore));
