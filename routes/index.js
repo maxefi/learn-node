@@ -9,7 +9,7 @@ const {
     getStoresByTag,
 } = storeController;
 
-const { loginForm } = userController;
+const { loginForm, registerForm } = userController;
 
 router.get('/', catchErrors(getStores));
 router.get('/stores', catchErrors(getStores));
@@ -21,5 +21,6 @@ router.get('/store/:slug', catchErrors(getStoreBySlug));
 router.get('/tags', catchErrors(getStoresByTag));
 router.get('/tags/:tag', catchErrors(getStoresByTag));
 router.get('/login', loginForm);
+router.get('/register', registerForm);
 
 module.exports = router;
