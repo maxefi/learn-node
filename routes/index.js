@@ -2,11 +2,14 @@ const express = require('express');
 const router = express.Router();
 const storeController = require('../controllers/storeConroller');
 const { catchErrors } = require('../handlers/errorHandlers');
+const userController = require('../controllers/userController');
 
 const {
     getStores, addStore, createStore, updateStore, editStore, upload, resize, getStoreBySlug,
     getStoresByTag,
 } = storeController;
+
+const { loginForm } = userController;
 
 router.get('/', catchErrors(getStores));
 router.get('/stores', catchErrors(getStores));
@@ -17,5 +20,6 @@ router.get('/stores/:id/edit', catchErrors(editStore));
 router.get('/store/:slug', catchErrors(getStoreBySlug));
 router.get('/tags', catchErrors(getStoresByTag));
 router.get('/tags/:tag', catchErrors(getStoresByTag));
+router.get('/login', loginForm);
 
 module.exports = router;
