@@ -9,7 +9,7 @@ const {
     getStores, addStore, createStore, updateStore, editStore, upload, resize, getStoreBySlug,
     getStoresByTag,
 } = storeController;
-const { loginForm, registerForm, validateRegister, register } = userController;
+const { loginForm, registerForm, validateRegister, register, account, updateAccount } = userController;
 const { login, logout, isLoggedIn } = authController;
 
 router.get('/', catchErrors(getStores));
@@ -26,5 +26,7 @@ router.get('/register', registerForm);
 router.post('/register', validateRegister, register, login);
 router.get('/logout', logout);
 router.post('/login', login);
+router.get('/account', isLoggedIn, account);
+router.post('/account', catchErrors(updateAccount));
 
 module.exports = router;
