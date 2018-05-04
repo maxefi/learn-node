@@ -20,6 +20,8 @@ const userSchema = new Schema({
         required: 'Please supple a name',
         trim: true,
     },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
 });
 
 // virtual field for avatar image

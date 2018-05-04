@@ -10,7 +10,7 @@ const {
     getStoresByTag,
 } = storeController;
 const { loginForm, registerForm, validateRegister, register, account, updateAccount } = userController;
-const { login, logout, isLoggedIn } = authController;
+const { login, logout, isLoggedIn, forgot, reset, confirmedPasswords, update } = authController;
 
 router.get('/', catchErrors(getStores));
 router.get('/stores', catchErrors(getStores));
@@ -28,5 +28,8 @@ router.get('/logout', logout);
 router.post('/login', login);
 router.get('/account', isLoggedIn, account);
 router.post('/account', catchErrors(updateAccount));
+router.post('/account/reset', catchErrors(forgot))
+router.get('/account/reset/:token', catchErrors(reset))
+router.post('/account/reset/:token', confirmedPasswords, catchErrors(update))
 
 module.exports = router;
