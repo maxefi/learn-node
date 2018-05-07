@@ -39,6 +39,7 @@ exports.resize = async (req, res, next) => {
 
 exports.createStore = async (req, res) => {
     // validation comes here
+    req.body.author = req.user._id;
     const store = await (new Store(req.body)).save();
     req.flash('success', `Successfully Created ${store.name}. Care to leave a review?`);
     res.redirect(`/store/${store.slug}`);
@@ -73,7 +74,7 @@ exports.updateStore = async (req, res) => {
 };
 
 exports.getStoreBySlug = async (req, res, next) => {
-    const store = await Store.findOne({ slug: req.params.slug });
+    const store = await Store.findOne({ slug: req.params.slug }).populate('author');
     if (!store) return next();
     res.render('store', { store, title: store.name });
 };
