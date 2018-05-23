@@ -7,7 +7,7 @@ const authController = require('../controllers/authController');
 
 const {
     getStores, addStore, createStore, updateStore, editStore, upload, resize, getStoreBySlug,
-    getStoresByTag, searchStores,
+    getStoresByTag, searchStores, mapStores,
 } = storeController;
 const { loginForm, registerForm, validateRegister, register, account, updateAccount } = userController;
 const { login, logout, isLoggedIn, forgot, reset, confirmedPasswords, update } = authController;
@@ -37,5 +37,6 @@ router.post('/account/reset/:token', confirmedPasswords, catchErrors(update));
  */
 
 router.get('/api/v1/search', catchErrors(searchStores));
+router.get('/api/stores/near', catchErrors(mapStores))
 
 module.exports = router;
