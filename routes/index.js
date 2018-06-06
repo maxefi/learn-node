@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const storeController = require('../controllers/storeConroller');
+const StoreController = require('../controllers/storeConroller');
 const { catchErrors } = require('../handlers/errorHandlers');
-const userController = require('../controllers/userController');
-const authController = require('../controllers/authController');
+const UserController = require('../controllers/userController');
+const AuthController = require('../controllers/authController');
+const ReviewController = require('../controllers/reviewController');
 
 const {
     getStores, addStore, createStore, updateStore, editStore, upload, resize, getStoreBySlug,
     getStoresByTag, searchStores, mapStores, mapPage, heartStore, getHeartedStores,
-} = storeController;
-const { loginForm, registerForm, validateRegister, register, account, updateAccount } = userController;
-const { login, logout, isLoggedIn, forgot, reset, confirmedPasswords, update } = authController;
+} = StoreController;
+const { loginForm, registerForm, validateRegister, register, account, updateAccount } = UserController;
+const { login, logout, isLoggedIn, forgot, reset, confirmedPasswords, update } = AuthController;
+const { addReview } = ReviewController;
 
 router.get('/', catchErrors(getStores));
 router.get('/stores', catchErrors(getStores));
@@ -33,6 +35,7 @@ router.get('/account/reset/:token', catchErrors(reset));
 router.post('/account/reset/:token', confirmedPasswords, catchErrors(update));
 router.get('/map', mapPage);
 router.get('/hearts', isLoggedIn, catchErrors(getHeartedStores));
+router.post('/reviews/:id', isLoggedIn, catchErrors(addReview));
 
 /*
     API
