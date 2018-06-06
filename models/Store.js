@@ -40,6 +40,9 @@ const storeSchema = new mongoose.Schema({
         ref: 'User',
         required: 'Author is REQUIRED',
     },
+}, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
 });
 
 // Define indexes
@@ -74,5 +77,14 @@ storeSchema.statics.getTagsList = function() {
         { $sort: { count: -1 } },
     ]);
 };
+
+// find reviews where the stores _id property === reviews store property
+// equals to SQL Join thing
+// virtual fields don't go to the object or json unless it's explicitly asked to
+storeSchema.virtual('reviews', {
+    ref: 'Review', // what model to link
+    localField: '_id', // which field on the store
+    foreignField: 'store', // which field on the store
+});
 
 module.exports = mongoose.model('Store', storeSchema);
