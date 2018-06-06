@@ -8,7 +8,7 @@ const ReviewController = require('../controllers/reviewController');
 
 const {
     getStores, addStore, createStore, updateStore, editStore, upload, resize, getStoreBySlug,
-    getStoresByTag, searchStores, mapStores, mapPage, heartStore, getHeartedStores,
+    getStoresByTag, searchStores, mapStores, mapPage, heartStore, getHeartedStores, getTopStores,
 } = StoreController;
 const { loginForm, registerForm, validateRegister, register, account, updateAccount } = UserController;
 const { login, logout, isLoggedIn, forgot, reset, confirmedPasswords, update } = AuthController;
@@ -36,6 +36,7 @@ router.post('/account/reset/:token', confirmedPasswords, catchErrors(update));
 router.get('/map', mapPage);
 router.get('/hearts', isLoggedIn, catchErrors(getHeartedStores));
 router.post('/reviews/:id', isLoggedIn, catchErrors(addReview));
+router.get('/top', catchErrors(getTopStores));
 
 /*
     API

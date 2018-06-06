@@ -47,6 +47,7 @@ exports.createStore = async (req, res) => {
 };
 
 exports.getStores = async (req, res) => {
+    // call .populate to get virtual fields
     const stores = await Store.find();
     res.render('stores', { title: 'Stores', stores });
 };
@@ -155,4 +156,9 @@ exports.getHeartedStores = async (req, res) => {
         _id: { $in: req.user.hearts },
     });
     res.render('stores', { title: 'Hearted Stores', stores });
+};
+
+exports.getTopStores = async (req, res) => {
+    const stores = await Store.getTopStores();
+    res.render('topStores', { title: 'Top Stores!', stores });
 };
