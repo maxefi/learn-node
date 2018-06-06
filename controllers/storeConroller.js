@@ -86,7 +86,7 @@ exports.getStoreBySlug = async (req, res, next) => {
 };
 
 exports.getStoresByTag = async (req, res, next) => {
-    const tag = req.params.tag;
+    const { tag } = req.params;
     // if no tag than any store that has 'tags'
     const tagQuery = tag || { $exists: true };
 
@@ -148,4 +148,11 @@ exports.heartStore = async (req, res) => {
         { [operator]: { hearts: req.params.id } },
         { new: true });
     res.json(user);
+};
+
+exports.getHeartedStores = async (req, res) => {
+    const stores = await Store.find({
+        _id: { $in: req.user.hearts },
+    });
+    res.render('stores', { title: 'Hearted Stores', stores });
 };

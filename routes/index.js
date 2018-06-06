@@ -7,7 +7,7 @@ const authController = require('../controllers/authController');
 
 const {
     getStores, addStore, createStore, updateStore, editStore, upload, resize, getStoreBySlug,
-    getStoresByTag, searchStores, mapStores, mapPage, heartStore,
+    getStoresByTag, searchStores, mapStores, mapPage, heartStore, getHeartedStores,
 } = storeController;
 const { loginForm, registerForm, validateRegister, register, account, updateAccount } = userController;
 const { login, logout, isLoggedIn, forgot, reset, confirmedPasswords, update } = authController;
@@ -32,6 +32,7 @@ router.post('/account/reset', catchErrors(forgot));
 router.get('/account/reset/:token', catchErrors(reset));
 router.post('/account/reset/:token', confirmedPasswords, catchErrors(update));
 router.get('/map', mapPage);
+router.get('/hearts', isLoggedIn, catchErrors(getHeartedStores));
 
 /*
     API
