@@ -16,6 +16,7 @@ const { addReview } = ReviewController;
 
 router.get('/', catchErrors(getStores));
 router.get('/stores', catchErrors(getStores));
+router.get('/stores/page/:page', catchErrors(getStores));
 router.get('/add', isLoggedIn, addStore);
 router.post('/add', upload, catchErrors(resize), catchErrors(createStore));
 router.post('/add/:id', upload, catchErrors(resize), catchErrors(updateStore));

@@ -1068,14 +1068,16 @@ label {
   .pagination__next {
     -ms-flex: 0 0 auto;
         flex: 0 0 auto;
-    padding: 1rem 3rem 1rem 1rem; }
+    padding: 1rem 3rem 1rem 1rem;
+    min-width: 96px; }
     .pagination__next a:after {
       margin-left: 1rem;
       content: '\2192'; }
   .pagination__prev {
     -ms-flex: 0 0 auto;
         flex: 0 0 auto;
-    padding: 1rem 1rem 1rem 3rem; }
+    padding: 1rem 1rem 1rem 3rem;
+    min-width: 96px; }
     .pagination__prev a:before {
       margin-right: 1rem;
       content: '\2190'; }
